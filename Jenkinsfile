@@ -2,18 +2,18 @@ pipeline {
     agent any
 
     environment {
-        AWS_REGION = "us-east-1"
+        AWS_REGION = "ap-south-1"
         CLUSTER_NAME = "microdegree-cluster"
         NAMESPACE = "microdegree"
         DEPLOYMENT_NAME = "openai-chatbot"
         SERVICE_NAME = "openai-chatbot-service"
-        IMAGE_NAME = "manojkrishnappa/genai-openai:${GIT_COMMIT}"
+        IMAGE_NAME = "babugudageri/genai-openai:${GIT_COMMIT}"
     }
 
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/ManojKRISHNAPPA/Generative-AI-Project.git'
+                git branch: 'main', url: 'https://github.com/BasavarajGudageri-05/Gen-AI-Project.git'
             }
         }
 
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     sh 'printenv'
-                    sh 'docker build -t manojkrishnappa/genai-openai:${GIT_COMMIT} .'
+                    sh 'docker build -t babugudageri/genai-openai:${GIT_COMMIT} .'
                 }
             }
         }
@@ -29,7 +29,7 @@ pipeline {
         stage('Docker Image Scan') {
             steps {
                 script {
-                    sh 'trivy image --format table -o trivy-image-report.html manojkrishnappa/genai-openai:${GIT_COMMIT}'
+                    sh 'trivy image --format table -o trivy-image-report.html babugudageri/genai-openai:${GIT_COMMIT}'
                 }
             }
         }
@@ -44,7 +44,7 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                sh 'docker push manojkrishnappa/genai-openai:${GIT_COMMIT}'
+                sh 'docker push babugudageri/genai-openai:${GIT_COMMIT}'
             }
         }
 
@@ -141,9 +141,9 @@ pipeline {
                 emailext (
                     subject: "${jobName} - Build ${buildNumber} - ${pipelineStatus.toUpperCase()}",
                     body: body,
-                    to: 'manojdevopstest@gmail.com',
-                    from: 'manojdevopstest@gmail.com',
-                    replyTo: 'manojdevopstest@gmail.com',
+                    to: 'basavarajgudageri143@gmail.com',
+                    from: 'basavarajgudageri143@gmail.com',
+                    replyTo: '+',
                     mimeType: 'text/html',
                     attachmentsPattern: 'trivy-image-report.html'
                 )
