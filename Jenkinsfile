@@ -88,7 +88,7 @@ pipeline {
                     credentialsId: 'kube',
                     namespace: "${NAMESPACE}",
                     restrictKubeConfigAccess: false,
-                    serverUrl: 'https://AB2AD8E7E396070F02E8CEC4D6A0D7E9.gr7.us-east-1.eks.amazonaws.com'
+                    serverUrl: 'https://EDF7AD45B9AE9E68B0C39F28F047D633.gr7.ap-south-1.eks.amazonaws.com'
                 ) {
                     sh "sed -i 's|replace|${IMAGE_NAME}|g' deployment.yaml"
                     sh "kubectl apply -f deployment.yaml -n ${NAMESPACE}"
@@ -106,7 +106,7 @@ pipeline {
                     credentialsId: 'kube',
                     namespace: "${NAMESPACE}",
                     restrictKubeConfigAccess: false,
-                    serverUrl: 'https://AB2AD8E7E396070F02E8CEC4D6A0D7E9.gr7.us-east-1.eks.amazonaws.com'
+                    serverUrl: 'https://EDF7AD45B9AE9E68B0C39F28F047D633.gr7.ap-south-1.eks.amazonaws.com'
                 ) {
                     sh "kubectl get deployment -n ${NAMESPACE}"
                     sh "kubectl get pods -n ${NAMESPACE}"
